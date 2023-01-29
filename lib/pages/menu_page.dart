@@ -1,7 +1,29 @@
+import 'package:coffee_app_flutter/provider/navigationbar_provider.dart';
+import 'package:coffee_app_flutter/widgets/custom_navigationbar_widget.dart';
 import 'package:flutter/material.dart';
 
+import 'package:provider/provider.dart';
+
 class MenuPage extends StatelessWidget {
-  const MenuPage({Key? key}) : super(key: key);
+  MenuPage({super.key});
+
+  final List pagesList = [
+    Container(
+      color: Colors.red,
+      alignment: Alignment.center,
+      child: const Text('Page 1'),
+    ),
+    Container(
+      color: Colors.green,
+      alignment: Alignment.center,
+      child: const Text('Page 2'),
+    ),
+    Container(
+      color: Colors.blue,
+      alignment: Alignment.center,
+      child: const Text('Page 3'),
+    ),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -10,19 +32,12 @@ class MenuPage extends StatelessWidget {
         centerTitle: true,
         title: const Text('Menu'),
       ),
-      body: const Center(
-        child: Text('Menu'),
+      body: Consumer<NavigationBarProvider>(
+        builder: (context, value, child) {
+          return pagesList[value.currentPageIndex];
+        },
       ),
-      bottomNavigationBar: NavigationBar(
-        selectedIndex: 0,
-        destinations: const [
-          NavigationDestination(icon: Icon(Icons.home_outlined), label: 'Home'),
-          NavigationDestination(
-              icon: Icon(Icons.location_on_outlined), label: 'Locations'),
-          NavigationDestination(
-              icon: Icon(Icons.person_outline), label: 'Profile'),
-        ],
-      ),
+      bottomNavigationBar: const CustomNavigationBarWidget(),
     );
   }
 }
