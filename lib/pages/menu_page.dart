@@ -4,15 +4,15 @@ import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
 
+import '../widgets/menu_listview_widget.dart';
+
 class MenuPage extends StatelessWidget {
   MenuPage({super.key});
 
   final List pagesList = [
-    Container(
-      color: Colors.red,
-      alignment: Alignment.center,
-      child: const Text('Page 1'),
-    ),
+    // MenuListViewWidget
+    const MenuListViewWidget(),
+
     Container(
       color: Colors.green,
       alignment: Alignment.center,
@@ -28,10 +28,6 @@ class MenuPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: const Text('Menu'),
-      ),
       body: Consumer<NavigationBarProvider>(
         builder: (context, value, child) {
           return pagesList[value.currentPageIndex];
